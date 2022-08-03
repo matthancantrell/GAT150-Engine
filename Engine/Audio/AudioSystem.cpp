@@ -1,4 +1,5 @@
 #include "AudioSystem.h"
+#include "Core/Logger.h"
 #include <fmod.hpp>
 
 void Engine::AudioSystem::Initialize()
@@ -33,6 +34,10 @@ void Engine::AudioSystem::AddAudio(const std::string& name, const std::string& f
 	{
 		FMOD::Sound* sound = nullptr;
 		fmodSystem_->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
+		if (sound == nullptr)
+		{
+			LOG("Error: Could Not Create Sound from %s.", filename.c_str());
+		}
 		sounds_[name] = sound;
 	}
 }
@@ -40,6 +45,10 @@ void Engine::AudioSystem::AddAudio(const std::string& name, const std::string& f
 void Engine::AudioSystem::PlayAudio(const std::string& name)
 {
 	auto it = sounds_.find(name);
+	if (it == sounds_.end())
+	{
+		LOG("Error: Could Not Find Sound %s.", name.c_str());
+	}
 	if (it != sounds_.end())
 	{
 		FMOD::Sound* sound = it->second;

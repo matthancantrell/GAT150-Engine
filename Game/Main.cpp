@@ -6,6 +6,8 @@ using namespace std;
 
 int main()
 {
+	
+
 	// Initialize Memory and Declare Filepath
 
 	Engine::InitializeMemory();
@@ -17,7 +19,7 @@ int main()
 	Engine::inputSystem_g.Initialize();
 	Engine::audioSystem_g.Initialize();
 
-	Engine::audioSystem_g.AddAudio("laser", "jump.wav");
+	Engine::audioSystem_g.AddAudio("laser", "laser.wav");
 
 	// Create A Window And Set Background Color
 	Engine::renderer_g.CreateWindow("Engine", 800, 600); // Creates the window with parameters
@@ -36,7 +38,7 @@ int main()
 		Engine::audioSystem_g.Update();
 		Engine::timer_g.Tick();
 
-		if (Engine::inputSystem_g.onKeyEsc(Engine::InputSystem::KeyState::Pressed)) quit = true;
+		if (Engine::inputSystem_g.GetKeyState(Engine::key_esc) == Engine::InputSystem::KeyState::Pressed) quit = true;
 
 		// Render
 		Engine::renderer_g.BeginFrame();

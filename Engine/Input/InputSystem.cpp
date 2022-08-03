@@ -112,48 +112,4 @@ namespace Engine
 
 		return mouseButtonState_;
 	}
-
-	bool InputSystem::onKeyLeft(Engine::InputSystem::KeyState state)
-	{
-		if (GetKeyState(key_left) == state) return true;
-		else return false;
-	}
-
-	bool InputSystem::onKeyRight(Engine::InputSystem::KeyState state)
-	{
-		if (GetKeyState(key_right) == state) return true;
-	
-		else return false;
-	}
-
-	bool InputSystem::onKeyUp(Engine::InputSystem::KeyState state)
-	{
-		if (GetKeyState(key_up) == state) return true;
-		else return false;
-	}
-
-	bool InputSystem::onKeyDown(Engine::InputSystem::KeyState state)
-	{
-		if (GetKeyState(key_down) == state) return true;
-		else return false;
-	}
-
-	bool InputSystem::onKeyEsc(Engine::InputSystem::KeyState state)
-	{
-		if (GetKeyState(key_esc) == state) return true;
-		else return false;
-	}
-
-	bool InputSystem::onKeySpace(Engine::InputSystem::KeyState state)
-	{
-		if (GetKeyState(key_space) == state) return true;
-		else return false;
-	}
-
-	bool InputSystem::onKeyShift(Engine::InputSystem::KeyState state)
-	{
-		if (GetKeyState(key_shift) == state) return true;
-		else return false;
-	}
-
 }
