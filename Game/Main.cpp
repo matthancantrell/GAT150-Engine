@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include <iostream>
 
 using namespace std;
 // DEPENDENCIES
@@ -22,6 +23,10 @@ int main()
 	Engine::renderer_g.CreateWindow("Engine", 800, 600); // Creates the window with parameters
 	Engine::renderer_g.SetClearColor(Engine::Color{ 0, 0, 0, 255 });
 
+	// Create A Texture
+	std::shared_ptr<Engine::Texture> texture = std::make_shared<Engine::Texture>();
+	texture->Create(Engine::renderer_g, "index.png");
+
 	bool quit = false;
 	while (!quit)
 	{
@@ -35,6 +40,8 @@ int main()
 
 		// Render
 		Engine::renderer_g.BeginFrame();
+
+		Engine::renderer_g.Draw(texture, { 200, 200 }, 0);
 
 		Engine::renderer_g.EndFrame();
 	}

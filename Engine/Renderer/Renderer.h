@@ -1,6 +1,7 @@
 #pragma once
 #include "../Math/Vector2.h"
 #include "../Math/Color.h"
+#include "Texture.h"
 
 struct SDL_Renderer; // forward declaration
 struct SDL_Window; // forward declaration
@@ -28,12 +29,16 @@ namespace Engine
 		void DrawLine(const Vector2& v1, const Vector2& v2, const Color& color); // Draws a line using vectors and assigns a color
 
 		void DrawPoint(float x, float y); // Draws a point using floats
-		void DrawPoint(const Vector2& v, const Color& color); // 
+		void DrawPoint(const Vector2& v, const Color& color);
+
+		void Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle = 0);
 
 		int GetWidth_() { return width_; }
 		int GetHeight_() { return height_; }
+		SDL_Renderer* GetRenderer_() { return renderer_; }
 
 		friend class Text;
+		friend class Texture;
 
 	private:
 		int width_ = 0;

@@ -1,18 +1,21 @@
 #include "Renderer.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <SDL_image.h>
 
 namespace Engine
 {
 	void Renderer::Initialize()
 	{
 		SDL_Init(SDL_INIT_VIDEO);
+		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 		TTF_Init();
 	}
 	void Renderer::ShutDown() // Shutdown is often in opposite order of initialization
 	{
 		SDL_DestroyRenderer(renderer_);
 		SDL_DestroyWindow(window_);
+		IMG_Quit();
 		TTF_Quit();
 	}
 	void Renderer::CreateWindow(const char* title, int width, int height)
@@ -51,5 +54,17 @@ namespace Engine
 	{
 		SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, color.a);
 		SDL_RenderDrawPointF(renderer_, v.x, v.y);
+	}
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle)
+	{
+		Vector2 size = texture->GetSize();
+
+		SDL_Rect dest;
+		dest.x = (int)position.x;
+		dest.y = (int)position.y;
+		dest.w = (int)size.x;
+		dest.h = (int)size.y;
+
+		SDL_RenderCopyEx(renderer_, texture->texture_, nullptr, &dest, angle, nullptr, SDL_FLIP_NONE);
 	}
 }
