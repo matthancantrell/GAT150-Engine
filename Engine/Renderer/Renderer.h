@@ -8,6 +8,9 @@ struct SDL_Window; // forward declaration
 
 namespace Engine
 {
+	class Texture;
+	class Transform;
+
 	class Renderer
 	{
 	public:
@@ -31,7 +34,8 @@ namespace Engine
 		void DrawPoint(float x, float y); // Draws a point using floats
 		void DrawPoint(const Vector2& v, const Color& color);
 
-		void Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle = 0);
+		void Draw(std::shared_ptr<Texture> texture, const Vector2& position, const float& angle = 0, const Vector2& scale = Vector2{ 1, 1 }, const Vector2& registration = Vector2 { 0.5f, 0.5f });
+		void Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration = Vector2{ 0.5f, 0.5f });
 
 		int GetWidth_() { return width_; }
 		int GetHeight_() { return height_; }

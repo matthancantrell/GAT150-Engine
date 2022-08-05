@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "Math/Transform.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
@@ -55,16 +56,38 @@ namespace Engine
 		SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, color.a);
 		SDL_RenderDrawPointF(renderer_, v.x, v.y);
 	}
-	void Renderer::Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle)
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const Vector2& position, const float& angle, const Vector2& scale, const Vector2& registration)
 	{
 		Vector2 size = texture->GetSize();
+		size = size * scale;
+		Vector2 origin = size * registration;
+		Vector2 t_position = position - (size * registration);
 
 		SDL_Rect dest;
-		dest.x = (int)position.x;
-		dest.y = (int)position.y;
+		dest.x = (int)t_position.x;
+		dest.y = (int)t_position.y;
 		dest.w = (int)size.x;
 		dest.h = (int)size.y;
 
-		SDL_RenderCopyEx(renderer_, texture->texture_, nullptr, &dest, angle, nullptr, SDL_FLIP_NONE);
+		SDL_Point center{ origin.x, origin.y };
+
+		SDL_RenderCopyEx(renderer_, texture->texture_, nullptr, &dest, angle, &center, SDL_FLIP_NONE);
+	}
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration)
+	{
+		Vector2 size = texture->GetSize();
+		size = size * transform.scale;
+		Vector2 origin = size * registration;
+		Vector2 tposition = transform.position - (size * registration);
+
+		SDL_Rect dest;
+		dest.x = tposition.x;
+		dest.y = tposition.y;
+		dest.w = (int)size.x;
+		dest.h = (int)size.y;
+
+		SDL_Point center{ origin.x, origin.y };
+
+		SDL_RenderCopyEx(renderer_, texture->texture_, nullptr, &dest, transform.rotation, &center, SDL_FLIP_HORIZONTAL);
 	}
 }

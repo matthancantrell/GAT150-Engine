@@ -17,7 +17,7 @@ namespace Engine
 			radius_ = CalculateRadius();
 		}
 
-		void Draw(Renderer& renderer, const Vector2& position, float angle, float scale);
+		void Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale = { 1, 1});
 
 		void Load(const std::string& filename);
 

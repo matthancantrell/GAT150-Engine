@@ -18,7 +18,7 @@ namespace Engine
 		virtual void Draw(Renderer& renderer);
 
 		virtual void OnCollision(Actor* other) {}
-		float GetRadius() { return model_.GetRadius() * transform_.scale; }
+		float GetRadius() { return model_.GetRadius() * std::max(transform_.scale.x, transform_.scale.y); }
 		std::string& GetTag() { return tag_; }
 		
 		friend class Scene;

@@ -64,22 +64,16 @@ namespace Engine
 		//Vector2 == Vector2
 		bool operator == (const Vector2& v) const { return (this->x == v.x && this->y == v.y); }
 		bool operator != (const Vector2& v) const { return (this->x != v.x || this->y != v.y); }
+
+		static const Vector2 One;
+		static const Vector2 Zero;
+		static const Vector2 Up;
+		static const Vector2 Down;
+		static const Vector2 Left;
+		static const Vector2 Right;
 	};
 
-	inline std::istream& operator >> (std::istream& stream, Vector2& v)
-	{
-		std::string line;
-		std::getline(stream, line);
-
-		// { ##, ##}
-		std::string xstring = line.substr(line.find("{") + 1, line.find(",") - (line.find("{") - 1));
-		v.x = std::stof(xstring);
-
-		std::string ystring = line.substr(line.find(",") + 1, line.find("}") - (line.find(",") + 1));
-		v.y = std::stof(ystring);
-
-		return stream;
-	}
+	inline std::istream& operator >> (std::istream& stream, Vector2& v);
 
 	inline float Vector2::LengthSqr() { return (x * x) + (y * y); }
 	inline float Vector2::Length() { return std::sqrt((x * x) + (y * y)); }
