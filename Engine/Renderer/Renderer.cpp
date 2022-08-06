@@ -88,6 +88,6 @@ namespace Engine
 
 		SDL_Point center{ origin.x, origin.y };
 
-		SDL_RenderCopyEx(renderer_, texture->texture_, nullptr, &dest, transform.rotation, &center, SDL_FLIP_HORIZONTAL);
+		SDL_RenderCopyEx(renderer_, texture->texture_, nullptr, &dest, transform.rotation, &center, SDL_FLIP_NONE);
 	}
 }

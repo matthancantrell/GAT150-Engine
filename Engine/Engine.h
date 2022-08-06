@@ -3,6 +3,9 @@
 #include "Core/File.h"
 #include "Core/Time.h"
 
+#include "Components/PlayerComponent.h"
+#include "Components/SpriteComponent.h"
+
 #include "Input/InputSystem.h"
 #include "Audio/AudioSystem.h"
 

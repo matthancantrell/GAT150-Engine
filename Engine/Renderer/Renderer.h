@@ -9,7 +9,7 @@ struct SDL_Window; // forward declaration
 namespace Engine
 {
 	class Texture;
-	class Transform;
+	struct Transform;
 
 	class Renderer
 	{

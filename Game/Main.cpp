@@ -31,7 +31,6 @@ int main()
 	cout << "Yes!" << endl;
 #endif
 
-
 	// Initialize Memory and Declare Filepath
 
 	Engine::InitializeMemory();
@@ -47,11 +46,23 @@ int main()
 
 	// Create A Window And Set Background Color
 	Engine::renderer_g.CreateWindow("Engine", 800, 600); // Creates the window with parameters
-	Engine::renderer_g.SetClearColor(Engine::Color{ 0, 0, 0, 255 });
+	Engine::renderer_g.SetClearColor(Engine::Color{ 0, 0, 0, 255 }); // Sets background color within window
 
 	// Create A Texture
 	std::shared_ptr<Engine::Texture> texture = std::make_shared<Engine::Texture>();
 	texture->Create(Engine::renderer_g, "index.png");
+
+	// Create Actors
+	Engine::Scene scene;
+	
+	Engine::Transform transform{ { 100,100 } , 0, {1, 1} };
+	unique_ptr<Engine::Actor> actor = make_unique<Engine::Actor>(); // Actors must be unique pointers
+	unique_ptr<Engine::PlayerComponent> playerComponent = make_unique<Engine::PlayerComponent>(); // PlayerComponents are also unique pointers
+	unique_ptr<Engine::SpriteComponent> spriteComponent = make_unique<Engine::SpriteComponent>();
+	spriteComponent->texture_ = texture;
+	actor->AddComponent(move(playerComponent));
+	actor->AddComponent(move(spriteComponent));
+	scene.Add(move(actor)); // Because unique, ownership must be moved
 
 	float angle = 0;
 
@@ -67,11 +78,13 @@ int main()
 		if (Engine::inputSystem_g.GetKeyState(Engine::key_esc) == Engine::InputSystem::KeyState::Pressed) quit = true;
 
 		angle += 360.0f * Engine::timer_g.deltaTime;
+		scene.Update();
 
 		// Render
 		Engine::renderer_g.BeginFrame();
 
-		Engine::renderer_g.Draw(texture, { 400, 300 }, angle, { 1, 1 }, { 0.5f, 0.5f });
+		//Engine::renderer_g.Draw(texture, { 400, 300 }, angle, { 1, 1 }, { 0.5f, 0.5f });
+		scene.Draw(Engine::renderer_g);
 
 		Engine::renderer_g.EndFrame();
 	}

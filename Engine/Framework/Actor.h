@@ -1,30 +1,35 @@
 #pragma once
 #include "GameObject.h"
-#include "../Renderer/Model.h"
-#include "Game.h"
+#include "Component.h"
+#include <vector>
 
 namespace Engine
 {
 	class Scene;
-	class Game;
+	class Renderer;
 
 	class Actor : public GameObject
 	{
 	public:
 		Actor() = default;
-		Actor(const Model& model,const Transform& transform) : GameObject{ transform }, model_{ model }  {}
+		Actor(const Transform& transform) : transform_{ transform } {}
 
-		virtual void Update() override {}
+		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
 
+		void AddComponent(std::unique_ptr<Component> component);
+
 		virtual void OnCollision(Actor* other) {}
-		float GetRadius() { return model_.GetRadius() * std::max(transform_.scale.x, transform_.scale.y); }
+		float GetRadius() { return 0; } // model_.GetRadius()* std::max(transform_.scale.x, transform_.scale.y);
+	
 		std::string& GetTag() { return tag_; }
 		
 		friend class Scene;
 
 		// State
 		bool destroy_ = false;
+
+		Transform transform_;
 
 	protected:
 
@@ -36,7 +41,8 @@ namespace Engine
 
 		// Object
 		Scene* scene_ = nullptr;
-		Model model_;
+
+		std::vector<std::unique_ptr<Component>> components_;
 
 	};
 }
