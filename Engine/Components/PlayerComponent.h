@@ -7,9 +7,7 @@ namespace Engine
 	{
 	public:
 
-		PlayerComponent() = default;
-		~PlayerComponent() = default;
-
 		void Update() override;
+
 	};
 }

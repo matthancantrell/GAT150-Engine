@@ -2,25 +2,43 @@
 #include "Engine.h"
 #include <iostream>
 
-void Engine::PlayerComponent::Update()
+namespace Engine
 {
-	if (Engine::inputSystem_g.GetKeyState(key_left) == Engine::InputSystem::Held)
+	void PlayerComponent::Update()
 	{
-		owner_->transform_.position += {-10, 0 };
-	}
+		// Movement
+		if (inputSystem_g.GetKeyState(key_left) == InputSystem::Held)
+		{
+			owner_->transform_.rotation -= 180 * timer_g.deltaTime;
+		}
+		if (inputSystem_g.GetKeyState(key_right) == InputSystem::Held)
+		{
+			owner_->transform_.rotation += +180 * timer_g.deltaTime;
+		}
 
-	if (Engine::inputSystem_g.GetKeyState(key_right) == Engine::InputSystem::Held)
-	{
-		owner_->transform_.position += { 10, 0 };
-	}
+		float thrust = 0;
+		if (inputSystem_g.GetKeyState(key_up) == InputSystem::Held)
+		{
+			thrust = 100;
+		}
 
-	if (Engine::inputSystem_g.GetKeyState(key_up) == Engine::InputSystem::Held)
-	{
-		owner_->transform_.position += { 0,-10 };
-	}
 
-	if (Engine::inputSystem_g.GetKeyState(key_down) == Engine::InputSystem::Held)
-	{
-		owner_->transform_.position += { 0,10 };
+		auto component = owner_->GetComponent<PhysicsComponent>();
+		if (component)
+		{
+			// Thrust Force
+			Vector2 force = Vector2::Rotate({ 1, 0 }, Math::DegToRad(owner_->transform_.rotation)) * thrust;
+			component->ApplyForce(force);
+
+			// Gravity
+			force = (Vector2{ 400,300 } - owner_->transform_.position).Normalized() * 60.0;
+			component->ApplyForce(force);
+		}
+		// Shoot
+		if (inputSystem_g.GetKeyState(key_space) == InputSystem::Held)
+		{
+			auto component = owner_->GetComponent<AudioComponent>();
+			if (component) component->Play();
+		}
 	}
 }

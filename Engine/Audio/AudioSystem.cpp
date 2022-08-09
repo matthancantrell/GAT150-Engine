@@ -42,7 +42,7 @@ void Engine::AudioSystem::AddAudio(const std::string& name, const std::string& f
 	}
 }
 
-void Engine::AudioSystem::PlayAudio(const std::string& name)
+void Engine::AudioSystem::PlayAudio(const std::string& name, bool loop)
 {
 	auto it = sounds_.find(name);
 	if (it == sounds_.end())

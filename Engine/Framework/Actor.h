@@ -19,6 +19,9 @@ namespace Engine
 
 		void AddComponent(std::unique_ptr<Component> component);
 
+		template<typename T>
+		T* GetComponent();
+
 		virtual void OnCollision(Actor* other) {}
 		float GetRadius() { return 0; } // model_.GetRadius()* std::max(transform_.scale.x, transform_.scale.y);
 	
@@ -45,4 +48,15 @@ namespace Engine
 		std::vector<std::unique_ptr<Component>> components_;
 
 	};
+
+	template<typename T>
+	inline T* Actor::GetComponent()
+	{
+		for (auto& component : components_)
+		{
+			T* result = dynamic_cast<T*>(component.get());
+			if (result) return result;
+		}
+		return nullptr;
+	}
 }
