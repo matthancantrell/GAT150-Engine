@@ -52,6 +52,8 @@ int main()
 	std::shared_ptr<Engine::Texture> texture = std::make_shared<Engine::Texture>();
 	texture->Create(Engine::renderer_g, "index.png");
 
+	float angle = 0;
+
 	Engine::audioSystem_g.AddAudio("Laser", "laser.wav");
 
 	// Create Actors
@@ -59,19 +61,26 @@ int main()
 	
 //	Engine::Transform transform{ { 100,100 } , 0, {1, 1} };
 	unique_ptr<Engine::Actor> actor = make_unique<Engine::Actor>(); // Actors must be unique pointers
+
+	// Player Component
 	unique_ptr<Engine::PlayerComponent> playerComponent = make_unique<Engine::PlayerComponent>(); // PlayerComponents are also unique pointers
+	actor->AddComponent(move(playerComponent));
+
+	// Sprite Component
 	unique_ptr<Engine::SpriteComponent> spriteComponent = make_unique<Engine::SpriteComponent>();
+	spriteComponent->texture_ = texture;
+	actor->AddComponent(move(spriteComponent));
+
+	// Physics Component
 	unique_ptr<Engine::PhysicsComponent> physicsComponent = make_unique<Engine::PhysicsComponent>();
+	actor->AddComponent(move(physicsComponent));
+
+	// Audio Component
 	unique_ptr<Engine::AudioComponent> laserSoundComponent = make_unique<Engine::AudioComponent>();
 	laserSoundComponent->soundName_ = "Laser";
 	actor->AddComponent(move(laserSoundComponent));
-	spriteComponent->texture_ = texture;
-	actor->AddComponent(move(playerComponent));
-	actor->AddComponent(move(spriteComponent));
-	actor->AddComponent(move(physicsComponent));
+	
 	scene.Add(move(actor)); // Because unique, ownership must be moved
-
-	float angle = 0;
 
 	bool quit = false;
 	while (!quit)

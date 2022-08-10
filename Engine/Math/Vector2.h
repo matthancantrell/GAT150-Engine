@@ -18,6 +18,8 @@ namespace Engine
 
 		//Functions
 		void Set(float x, float y) { this->x = x, this->y = y; }
+		float operator [] (size_t index) const { return (&x)[index]; }
+		float& operator[](size_t index) { return (&x)[index]; }
 		Vector2 Add(const Vector2& v) { return Vector2{ v.x + x, v.y + y }; }
 
 		float LengthSqr();
