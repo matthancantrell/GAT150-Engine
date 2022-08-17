@@ -3,9 +3,10 @@
 #include <vector>
 #include <string>
 
+
 namespace Engine
 {
-	class Model
+	class Model : public Resource
 	{
 
 	public:
@@ -17,9 +18,12 @@ namespace Engine
 			radius_ = CalculateRadius();
 		}
 
-		void Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale = { 1, 1});
+		bool Create(const std::string filename, ...)override;
 
-		void Load(const std::string& filename);
+		void Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale);
+		void Draw(Renderer& renderer, const Transform& transform);
+
+		bool Load(const std::string& filename);
 
 		float GetRadius() { return radius_; }
 		float CalculateRadius();

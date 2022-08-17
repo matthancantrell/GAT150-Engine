@@ -12,7 +12,7 @@ namespace Engine
         //Constructors
         Vector3() : x{ 0 }, y{ 0 }, z{ 0 } {}
         Vector3(float x, float y, float z) : x{ x }, y{ y }, z{ z } {}
-        Vector3(float v) : x{ v }, y{ v }, z{ z } {}
+        Vector3(float v) : x{ v }, y{ v }, z{ v } {}
         Vector3(int x, int y, int z) : x{ (float)x }, y{ (float)y }, z{ (float)z } {}
 
         //Functions
@@ -61,7 +61,7 @@ namespace Engine
         //Comparison
         //Vector3 == Vector3
         bool operator == (const Vector3& v) const { return (this->x == v.x && this->y == v.y, this->z == v.z); }
-        bool operator != (const Vector3& v) const { return (this->x != v.x || this->y != v.y, this->z != v.z); }
+        bool operator != (const Vector3& v) const { return !(*this == v); }
 
         float LengthSqr();
         float Length();

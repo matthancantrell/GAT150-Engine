@@ -38,15 +38,6 @@ namespace Engine
 		bool GetButtonDown(uint32_t button) { return mouseButtonState_[button]; }
 		bool GetPreviousButtonDown(uint32_t button) { return prevMouseButtonState_[button]; }
 
-		bool onKeyLeft(Engine::InputSystem::KeyState state);
-		bool onKeyRight(Engine::InputSystem::KeyState state);
-		bool onKeyUp(Engine::InputSystem::KeyState state);
-		bool onKeyDown(Engine::InputSystem::KeyState state);
-
-		bool onKeyEsc(Engine::InputSystem::KeyState state);
-		bool onKeySpace(Engine::InputSystem::KeyState state);
-		bool onKeyShift(Engine::InputSystem::KeyState state);
-
 	private:
 
 		int numKeys_;

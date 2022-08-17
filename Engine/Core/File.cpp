@@ -1,4 +1,5 @@
 #include "File.h"
+#include "Logger.h"
 #include <filesystem>
 #include <fstream>
 
@@ -33,6 +34,7 @@ namespace Engine {
 	{
 		if (!FileExists(pathname))
 		{
+			LOG("Error: Could not read file %s", pathname.c_str());
 			return false;
 		}
 

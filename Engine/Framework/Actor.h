@@ -17,6 +17,7 @@ namespace Engine
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
 
+		void AddChild(std::unique_ptr<Actor> child);
 		void AddComponent(std::unique_ptr<Component> component);
 
 		template<typename T>
@@ -44,8 +45,10 @@ namespace Engine
 
 		// Object
 		Scene* scene_ = nullptr;
+		Actor* parent_ = nullptr;
 
 		std::vector<std::unique_ptr<Component>> components_;
+		std::vector < std::unique_ptr<Actor>> children_;
 
 	};
 

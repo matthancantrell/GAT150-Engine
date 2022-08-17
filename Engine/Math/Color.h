@@ -8,9 +8,13 @@ namespace Engine
 		uint8_t r, g, b, a;
 
 		friend std::istream& operator >> (std::istream& stream, Color& color);
+		uint8_t  operator [] (size_t index) const { return (&r)[index]; }
+		uint8_t& operator [] (size_t index) { return (&r)[index]; }
 
 		friend class Text;
 	};
+
+	std::ostream& operator << (std::ostream& stream, const Color& color);
 
 	inline std::istream& operator >> (std::istream& stream, Color& Color)
 	{
@@ -42,6 +46,12 @@ namespace Engine
 		// default alpha to 255 
 		Color.a = 255;
 
+		return stream;
+	}
+
+	std::ostream& operator << (std::ostream& stream, const Color& color)
+	{
+		stream << (int)color.r << " " << (int)color.g << " " << (int)color.b << " " << (int)color.a;
 		return stream;
 	}
 }

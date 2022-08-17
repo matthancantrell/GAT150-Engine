@@ -69,7 +69,7 @@ namespace Engine
 		dest.w = (int)size.x;
 		dest.h = (int)size.y;
 
-		SDL_Point center{ origin.x, origin.y };
+		SDL_Point center{ (int)origin.x, (int)origin.y };
 
 		SDL_RenderCopyEx(renderer_, texture->texture_, nullptr, &dest, angle, &center, SDL_FLIP_NONE);
 	}
@@ -81,12 +81,12 @@ namespace Engine
 		Vector2 tposition = transform.position - (size * registration);
 
 		SDL_Rect dest;
-		dest.x = tposition.x;
-		dest.y = tposition.y;
+		dest.x = (int)tposition.x;
+		dest.y = (int)tposition.y;
 		dest.w = (int)size.x;
 		dest.h = (int)size.y;
 
-		SDL_Point center{ origin.x, origin.y };
+		SDL_Point center{ (int)origin.x, (int)origin.y };
 
 		SDL_RenderCopyEx(renderer_, texture->texture_, nullptr, &dest, transform.rotation, &center, SDL_FLIP_NONE);
 	}

@@ -26,8 +26,8 @@ namespace Engine
 
     inline Matrix2x2::Matrix2x2(const Vector2& row1, const Vector2& row2)
     {
-        rows[0];
-        rows[1];
+        rows[0] = row1;
+        rows[1] = row2;
     }
 
     inline Vector2 Matrix2x2::operator * (const Vector2& v)
