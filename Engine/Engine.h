@@ -8,6 +8,7 @@
 
 #include "Components/PlayerComponent.h"
 #include "Components/SpriteComponent.h"
+#include "Components/SpriteAnimateComponent.h"
 #include "Components/AudioComponent.h"
 #include "Components/PhysicsComponent.h"
 #include "Components/ModelComponent.h"
@@ -27,6 +28,7 @@
 
 #include "Framework/Scene.h"
 #include "Framework/Game.h"
+#include "Framework/GameObject.h"
 #include "Framework/Singleton.h"
 #include "Framework/Factory.h"
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "../Math/Transform.h"
 
-#define REGISTER_CLASS(class) Factory::Instance().Register<class>(#class)
+#define REGISTER_CLASS(class) Factory::Instance().Register<class>(#class);
 
 namespace Engine
 {

@@ -1,5 +1,6 @@
 #include "Scene.h"
-#include <algorithm>
+#include "Factory.h"
+#include "Core/Logger.h"
 #include <iostream>
 
 namespace Engine
@@ -50,5 +51,34 @@ namespace Engine
 	{
 		actor->scene_ = this;
 		actors_.push_back(std::move(actor));
+	}
+	bool Scene::Write(const rapidjson::Value& value) const
+	{
+		return true;
+	}
+
+	bool Scene::Read(const rapidjson::Value& value)
+	{
+		if (!value.HasMember("actors") || !value["actors"].IsArray())
+		{
+			LOG("Error reading file, neither an Actor nor Array");
+			return false;
+		}
+
+		//read actors
+		for (auto& actorValue : value["actors"].GetArray())
+		{
+			std::string type;
+			READ_DATA(actorValue, type);
+
+			auto actor = Factory::Instance().Create<Actor>(type);
+			if (actor)
+			{
+				actor->Read(actorValue);
+				Add(std::move(actor));
+			}
+		}
+
+		return true;
 	}
 }

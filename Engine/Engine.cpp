@@ -10,6 +10,12 @@ namespace Engine
 
 	void Engine::Register()
 	{
-		Factory::Instance().Register<Actor>("Actor");
+		REGISTER_CLASS(Actor);
+		REGISTER_CLASS(AudioComponent);
+		REGISTER_CLASS(ModelComponent);
+		REGISTER_CLASS(PhysicsComponent);
+		REGISTER_CLASS(PlayerComponent);
+		REGISTER_CLASS(SpriteComponent);
+		REGISTER_CLASS(SpriteAnimateComponent);
 	}
 }

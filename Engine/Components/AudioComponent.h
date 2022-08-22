@@ -13,6 +13,9 @@ namespace Engine
 		void Play();
 		void Stop();
 
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
+
 		std::string soundName_;
 		float volume_ { 1 };
 		float pitch_ { 1 };

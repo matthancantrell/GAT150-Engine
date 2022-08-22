@@ -41,4 +41,16 @@ namespace Engine
 			if (component) component->Play();
 		}
 	}
+
+	bool PlayerComponent::Write(const rapidjson::Value& value) const
+	{
+		return true;
+	}
+
+	bool PlayerComponent::Read(const rapidjson::Value& value)
+	{
+		READ_DATA(value, speed);
+
+		return true;
+	}
 }

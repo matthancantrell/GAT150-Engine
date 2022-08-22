@@ -3,14 +3,22 @@
 #include "Matrix2x2.h"
 #include "Matrix3x3.h"
 #include "MathUtils.h"
+#include "Serialization/Serialization.h"
 
 namespace Engine
 {
-	struct Transform
+	struct Transform: public ISerializable
 	{
 		Vector2 position;
 		float rotation;
 		Vector2 scale{ 1, 1 };
+
+		virtual bool Write(const rapidjson::Value& value) const override { return true; }
+		virtual bool Read(const rapidjson::Value& value) override
+		{
+			READ_DATA(value, position, scale, rotation);
+			return true;
+		}
 
 		Matrix3x3 matrix;
 		void Update()

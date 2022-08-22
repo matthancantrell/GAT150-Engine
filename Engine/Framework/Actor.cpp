@@ -1,5 +1,6 @@
 #include "Actor.h"
 #include "Components/RenderComponent.h"
+#include "Factory.h"
 
 namespace Engine
 {
@@ -13,6 +14,11 @@ namespace Engine
 			{
 				renderComponent->Draw(renderer);
 			}
+		}
+
+		for (auto& child : children_)
+		{
+			child->Draw(renderer);
 		}
 	}
 	void Actor::AddChild(std::unique_ptr<Actor> child)
@@ -49,5 +55,31 @@ namespace Engine
 		}
 
 		transform_.Update();
+	}
+
+	bool Actor::Read(const rapidjson::Value& value)
+	{
+		READ_DATA(value, tag_);
+		READ_DATA(value, name_);
+
+		transform_.Read(value["actors"]);
+
+		if (!(value.HasMember("actors")) || !value["actors"].IsArray())
+		{
+			for (auto& componentValue : value["components"].GetArray())
+			{
+				std::string type;
+				READ_DATA(componentValue, type);
+
+				auto component = Factory::Instance().Create<Component>(type);
+				if (component)
+				{
+					component->Read(componentValue);
+					AddComponent(std::move(component));
+				}
+			}
+		}
+
+		return true;
 	}
 }

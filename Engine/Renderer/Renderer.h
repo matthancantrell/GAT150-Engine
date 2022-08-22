@@ -10,6 +10,7 @@ namespace Engine
 {
 	class Texture;
 	struct Transform;
+	struct Rect;
 
 	class Renderer
 	{
@@ -36,6 +37,7 @@ namespace Engine
 
 		void Draw(std::shared_ptr<Texture> texture, const Vector2& position, const float& angle = 0, const Vector2& scale = Vector2{ 1, 1 }, const Vector2& registration = Vector2 { 0.5f, 0.5f });
 		void Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration = Vector2{ 0.5f, 0.5f });
+		void Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration = Vector2{ 0.5f, 0.5f });
 
 		int GetWidth_() { return width_; }
 		int GetHeight_() { return height_; }

@@ -1,14 +1,16 @@
 #pragma once
 #include "GameObject.h"
 #include "Component.h"
+#include "Serialization/Json.h"
 #include <vector>
 
 namespace Engine
 {
 	class Scene;
+	class Component;
 	class Renderer;
 
-	class Actor : public GameObject
+	class Actor : public GameObject, public ISerializable
 	{
 	public:
 		Actor() = default;
@@ -16,6 +18,9 @@ namespace Engine
 
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
+
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 
 		void AddChild(std::unique_ptr<Actor> child);
 		void AddComponent(std::unique_ptr<Component> component);
@@ -27,6 +32,9 @@ namespace Engine
 		float GetRadius() { return 0; } // model_.GetRadius()* std::max(transform_.scale.x, transform_.scale.y);
 	
 		std::string& GetTag() { return tag_; }
+		std::string& GetName() { return name_; }
+
+		void SetName(const std::string& name) { this->name_ = name; }
 		
 		friend class Scene;
 
@@ -38,6 +46,7 @@ namespace Engine
 	protected:
 
 		std::string tag_;
+		std::string name_;
 
 		// Physics
 		Vector2 velocity_;

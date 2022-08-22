@@ -13,6 +13,9 @@ namespace Engine
 		void Update() override;
 		void ApplyForce(const Vector2& force) { acceleration_ += force; }
 
+		bool Write(const rapidjson::Value& value) const;
+		bool Read(const rapidjson::Value& value);
+
 		Vector2 velocity_;
 		Vector2 acceleration_;
 

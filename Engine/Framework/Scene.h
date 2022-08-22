@@ -5,10 +5,8 @@
 
 namespace Engine
 {
-	class Actor;
-	class Renderer;
 
-	class Scene
+	class Scene : public ISerializable
 	{
 	public:
 
@@ -18,6 +16,9 @@ namespace Engine
 		void Update();
 		void Draw(Renderer& renderer);
 		void Add(std::unique_ptr<Actor> actor);
+
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 
 		template<typename T>
 		T* GetActor();

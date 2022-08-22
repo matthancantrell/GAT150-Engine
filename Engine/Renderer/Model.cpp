@@ -1,9 +1,10 @@
 #include "Model.h"
-#include "../Core/File.h"
+#include "Core/File.h"
 #include "Core/Logger.h"
 #include "Math/Transform.h"
 #include "Math/MathUtils.h"
 
+#include <cstdarg>
 #include <iostream>
 #include <sstream>
 
@@ -17,6 +18,19 @@ namespace Engine
 			return false;
 		}
 		return true;
+	}
+
+	bool Model::Create(const std::string filename, ...)
+	{
+		va_list args;
+
+		va_start(args, filename);
+
+		Renderer& renderer = va_arg(args, Renderer);
+
+		va_end(args);
+
+		return Create(filename, renderer);
 	}
 
 	void Model::Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale)

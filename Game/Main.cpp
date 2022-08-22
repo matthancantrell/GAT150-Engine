@@ -57,10 +57,11 @@ int main()
 
 	// Create A Window And Set Background Color
 	Engine::renderer_g.CreateWindow("Engine", 800, 600); // Creates the window with parameters
-	Engine::renderer_g.SetClearColor(Engine::Color{ 0, 0, 0, 255 }); // Sets background color within window
+	Engine::renderer_g.SetClearColor(Engine::Color{ 50, 50, 50, 255 }); // Sets background color within window
 
 	// Scene, Actor, Components
 	Engine::Scene scene;
+	scene.Read(document);
 	
 	bool quit = false;
 	while (!quit)
@@ -86,4 +87,5 @@ int main()
 	Engine::inputSystem_g.ShutDown();
 	Engine::audioSystem_g.ShutDown();
 	Engine::renderer_g.ShutDown();
+	Engine::resourceManager_g.ShutDown();
 }

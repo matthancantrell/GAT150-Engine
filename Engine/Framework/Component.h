@@ -1,9 +1,10 @@
 #pragma once
 #include "GameObject.h"
+#include "Serialization/Serialization.h"
 
 namespace Engine
 {
-	class Component : public GameObject
+	class Component : public GameObject, public ISerializable
 	{
 	public:
 
