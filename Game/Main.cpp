@@ -30,7 +30,11 @@ int main()
 
 	// Scene, Actor, Components
 	Engine::Scene scene;
-	//scene.Read(document);
+
+	rapidjson::Document document;
+	bool success = Engine::json::Load("Levels/level.txt", document);
+	scene.Read(document);
+	scene.Initialize();
 	
 	bool quit = false;
 	while (!quit)

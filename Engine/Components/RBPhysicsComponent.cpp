@@ -13,7 +13,7 @@ namespace Engine
 
 	void RBPhysicsComponent::Initialize()
 	{
-		physics_g.CreateBody(owner_->transform_.position, owner_->transform_.rotation, data);
+		body_ = physics_g.CreateBody(owner_->transform_.position, owner_->transform_.rotation, data);
 		body_->SetGravityScale(data.gravity_scale);
 		body_->SetLinearDamping(damping);
 	}

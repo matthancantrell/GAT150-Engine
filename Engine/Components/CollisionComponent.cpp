@@ -5,10 +5,10 @@ namespace Engine
 {
     void CollisionComponent::Initialize()
     {
-        auto component = owner_->GetComponent<PhysicsComponent>();
+        auto component = owner_->GetComponent<RBPhysicsComponent>();
         if (component)
         {
-            physics_g.SetCollisionBox(nullptr, data, owner_);
+            physics_g.SetCollisionBox(component->body_, data, owner_);
         }
     }
 

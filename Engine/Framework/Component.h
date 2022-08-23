@@ -1,22 +1,21 @@
 #pragma once
 #include "GameObject.h"
-#include "Serialization/Serialization.h"
-#include "Actor.h"
 
 namespace Engine
 {
+	class Actor;
+
 	class Component : public GameObject, public ISerializable
 	{
 	public:
-
 		Component() = default;
-		~Component() = default;
+
+		virtual void Initialize() override {}
+		virtual void Update() = 0;
 
 		friend class Actor;
 
 	protected:
-
 		Actor* owner_ = nullptr;
-
 	};
 }

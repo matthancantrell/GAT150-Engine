@@ -8,8 +8,6 @@ namespace Engine
 	class RenderComponent : public Component
 	{
 	public:
-
 		virtual void Draw(Renderer& renderer) = 0;
-		virtual void Initialize() override {}
 	};
 }

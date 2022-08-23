@@ -4,16 +4,17 @@
 
 namespace Engine
 {
-
 	class RBPhysicsComponent : public PhysicsComponent
 	{
+	public:
 		RBPhysicsComponent() = default;
 		~RBPhysicsComponent();
 
 		void Initialize() override;
-
-		virtual void ApplyForce(const Vector2& force);
 		void Update() override;
+
+		virtual void ApplyForce(const Vector2& force) override;
+		
 		bool Write(const rapidjson::Value& value) const override;
 		bool Read(const rapidjson::Value& value) override;
 
