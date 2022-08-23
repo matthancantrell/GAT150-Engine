@@ -35,6 +35,11 @@ namespace Engine
 		// Adds the component to the list of components in this Actor 
 		components_.push_back(std::move(component));
 	}
+	void Actor::Initialize()
+	{
+		for (auto& component : components_) { component->Initialize(); }
+		for (auto& child : children_) { child->Initialize(); }
+	}
 	void Engine::Actor::Update()
 	{
 		for (auto& component : components_)
@@ -57,14 +62,16 @@ namespace Engine
 		transform_.Update();
 	}
 
+	bool Actor::Write(const rapidjson::Value& value) const { return true; }
+
 	bool Actor::Read(const rapidjson::Value& value)
 	{
 		READ_DATA(value, tag_);
 		READ_DATA(value, name_);
 
-		transform_.Read(value["actors"]);
+		transform_.Read(value["transform"]);
 
-		if (!(value.HasMember("actors")) || !value["actors"].IsArray())
+		if (!(value.HasMember("transform")) || !value["transform"].IsArray())
 		{
 			for (auto& componentValue : value["components"].GetArray())
 			{

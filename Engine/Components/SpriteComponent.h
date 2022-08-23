@@ -1,6 +1,7 @@
 #pragma once
 #include "RenderComponent.h"
 #include "Math/Rect.h"
+#include "Serialization/Json.h"
 
 namespace Engine
 {
@@ -12,6 +13,8 @@ namespace Engine
 
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;
+
+		virtual void Initialize() override {}
 
 		bool Write(const rapidjson::Value& value) const;
 		bool Read(const rapidjson::Value& value);

@@ -12,6 +12,8 @@ namespace Engine
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
+		virtual void Initialize() override {}
+
 		float speed = 0;
 	};
 }

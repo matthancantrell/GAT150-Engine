@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Serialization/Serialization.h"
+#include "Actor.h"
 
 namespace Engine
 {

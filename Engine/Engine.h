@@ -11,6 +11,8 @@
 #include "Components/SpriteAnimateComponent.h"
 #include "Components/AudioComponent.h"
 #include "Components/PhysicsComponent.h"
+#include "Components/RBPhysicsComponent.h"
+#include "Components/CollisionComponent.h"
 #include "Components/ModelComponent.h"
 
 #include "Input/InputSystem.h"
@@ -34,6 +36,8 @@
 
 #include "Resource/ResourceManager.h"
 
+#include "Physics/PhysicsSystem.h"
+
 #include <memory>
 #include <vector>
 #include <list>
@@ -46,6 +50,7 @@ namespace Engine
 	extern Time timer_g;
 	extern AudioSystem audioSystem_g;
 	extern ResourceManager resourceManager_g;
+	extern PhysicsSystem physics_g;
 
 	class Engine : public Singleton<Engine>
 	{

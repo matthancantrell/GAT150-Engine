@@ -7,13 +7,14 @@ namespace Engine
 	void PlayerComponent::Update()
 	{
 		// Movement
+		Vector2 direction = Vector2::Zero;
 		if (inputSystem_g.GetKeyState(key_left) == InputSystem::Held)
 		{
-			owner_->transform_.rotation -= 180 * timer_g.deltaTime;
+			direction = Vector2::Left;
 		}
 		if (inputSystem_g.GetKeyState(key_right) == InputSystem::Held)
 		{
-			owner_->transform_.rotation += +180 * timer_g.deltaTime;
+			direction = Vector2::Right;
 		}
 
 		float thrust = 0;
@@ -26,19 +27,16 @@ namespace Engine
 		auto component = owner_->GetComponent<PhysicsComponent>();
 		if (component)
 		{
-			// Thrust Force
-			Vector2 force = Vector2::Rotate({ 1, 0 }, Math::DegToRad(owner_->transform_.rotation)) * thrust;
-			component->ApplyForce(force);
-
-			// Gravity
-			force = (Vector2{ 400,300 } - owner_->transform_.position).Normalized() * 60.0;
-			component->ApplyForce(force);
+			component->ApplyForce(direction * speed);
 		}
 		// Shoot
 		if (inputSystem_g.GetKeyState(key_space) == InputSystem::Held)
 		{
-			auto component = owner_->GetComponent<AudioComponent>();
-			if (component) component->Play();
+			auto component = owner_->GetComponent<PhysicsComponent>();
+			if (component)
+			{
+				component->ApplyForce(Vector2::Up * 30);
+			}
 		}
 	}
 

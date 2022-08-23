@@ -26,7 +26,7 @@ namespace Engine
 
 		texture_ = resourceManager_g.Get<Texture>(texture_name, renderer_g);
 
-		if (!READ_DATA(value, source))
+		if ( !READ_DATA(value, source) )
 		{
 			source.x = 0;
 			source.y = 0;

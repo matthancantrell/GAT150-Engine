@@ -14,44 +14,13 @@ int main()
 	Engine::InitializeMemory();
 	Engine::SetFilePath("../Assets");
 
-	rapidjson::Document document;
-	bool success = Engine::json::Load("json.txt", document);
-	assert(success);
-
-	std::string str;
-	Engine::json::Get(document, "string", str);
-	std::cout << str << std::endl;
-
-	bool b;
-	Engine::json::Get(document, "boolean", b);
-	std::cout << b << std::endl;
-
-	int i1;
-	Engine::json::Get(document, "integer1", i1);
-	std::cout << i1 << std::endl;
-
-	int i2;
-	Engine::json::Get(document, "integer2", i2);
-	std::cout << i2 << std::endl;
-
-	float f;
-	Engine::json::Get(document, "float", f);
-	std::cout << f << std::endl;
-
-	Engine::Vector2 v2;
-	Engine::json::Get(document, "vector2", v2);
-	std::cout << v2 << std::endl;
-
-	Engine::Color color;
-	Engine::json::Get(document, "color", color);
-	std::cout << color << std::endl;
-
 	// Initialize Our Major Systems
 
 	Engine::renderer_g.Initialize();
 	Engine::inputSystem_g.Initialize();
 	Engine::audioSystem_g.Initialize();
 	Engine::resourceManager_g.Initialize();
+	Engine::physics_g.Initialize();
 
 	Engine::Engine::Instance().Register();
 
@@ -61,7 +30,7 @@ int main()
 
 	// Scene, Actor, Components
 	Engine::Scene scene;
-	scene.Read(document);
+	//scene.Read(document);
 	
 	bool quit = false;
 	while (!quit)
@@ -88,4 +57,5 @@ int main()
 	Engine::audioSystem_g.ShutDown();
 	Engine::renderer_g.ShutDown();
 	Engine::resourceManager_g.ShutDown();
+	Engine::physics_g.Shutdown();
 }

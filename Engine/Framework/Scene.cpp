@@ -5,6 +5,11 @@
 
 namespace Engine
 {
+	void Scene::Initialize()
+	{
+		for (auto& actor : actors_) { actor->Initialize(); }
+	}
+
 	void Scene::Update()
 	{
 		auto iter = actors_.begin();
@@ -56,7 +61,6 @@ namespace Engine
 	{
 		return true;
 	}
-
 	bool Scene::Read(const rapidjson::Value& value)
 	{
 		if (!value.HasMember("actors") || !value["actors"].IsArray())

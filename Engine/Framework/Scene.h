@@ -13,6 +13,8 @@ namespace Engine
 		Scene() = default;
 		~Scene() = default;
 
+		void Initialize();
+
 		void Update();
 		void Draw(Renderer& renderer);
 		void Add(std::unique_ptr<Actor> actor);

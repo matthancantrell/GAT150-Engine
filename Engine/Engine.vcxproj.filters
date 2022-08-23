@@ -36,6 +36,9 @@
     <Filter Include="Source\Serialization">
       <UniqueIdentifier>{5efc956f-dd2e-44a9-9535-bd3fe2eee15a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Physics">
+      <UniqueIdentifier>{3dea536c-f245-48c0-8d59-5b150f633567}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathUtils.cpp">
@@ -117,6 +120,15 @@
       <Filter>Source\Math</Filter>
     </ClCompile>
     <ClCompile Include="Components\SpriteAnimateComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsSystem.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\RBPhysicsComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CollisionComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -236,6 +248,18 @@
       <Filter>Source\Math</Filter>
     </ClInclude>
     <ClInclude Include="Components\SpriteAnimateComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsSystem.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RBPhysicsComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Collision.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CollisionComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
   </ItemGroup>

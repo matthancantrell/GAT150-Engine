@@ -16,6 +16,8 @@ namespace Engine
 		Actor() = default;
 		Actor(const Transform& transform) : transform_{ transform } {}
 
+		virtual void Initialize() override;
+
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
 

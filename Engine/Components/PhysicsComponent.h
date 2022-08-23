@@ -11,7 +11,9 @@ namespace Engine
 		PhysicsComponent() = default;
 
 		void Update() override;
-		void ApplyForce(const Vector2& force) { acceleration_ += force; }
+		virtual void ApplyForce(const Vector2& force) { acceleration_ += force; }
+
+		virtual void Initialize() override {}
 
 		bool Write(const rapidjson::Value& value) const;
 		bool Read(const rapidjson::Value& value);

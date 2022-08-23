@@ -16,7 +16,10 @@ namespace Engine
 		virtual bool Write(const rapidjson::Value& value) const override { return true; }
 		virtual bool Read(const rapidjson::Value& value) override
 		{
-			READ_DATA(value, position, scale, rotation);
+			READ_DATA(value, position);
+			READ_DATA(value, rotation);
+			READ_DATA(value, scale);
+
 			return true;
 		}
 

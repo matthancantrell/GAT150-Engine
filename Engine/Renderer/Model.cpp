@@ -10,15 +10,15 @@
 
 namespace Engine
 {
-	bool Model::Create(const std::string filename, ...)
-	{
-		if (!Load(filename))
-		{
-			LOG("Error: Could Not Create Model.");
-			return false;
-		}
-		return true;
-	}
+	//bool Model::Create(const std::string filename, ...)
+	//{
+	//	if (!Load(filename))
+	//	{
+	//		LOG("Error: Could Not Create Model.");
+	//		return false;
+	//	}
+	//	return true;
+	//}
 
 	bool Model::Create(const std::string filename, ...)
 	{

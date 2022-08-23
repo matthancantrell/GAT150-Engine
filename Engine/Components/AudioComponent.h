@@ -13,6 +13,8 @@ namespace Engine
 		void Play();
 		void Stop();
 
+		virtual void Initialize() override {}
+
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 

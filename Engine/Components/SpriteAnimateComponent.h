@@ -13,6 +13,8 @@ namespace Engine
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;
 
+		virtual void Initialize() override {}
+
 		bool Write(const rapidjson::Value& value) const override;
 		bool Read(const rapidjson::Value& value) override;
 

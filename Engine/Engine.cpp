@@ -7,6 +7,7 @@ namespace Engine
 	Time timer_g;
 	AudioSystem audioSystem_g;
 	ResourceManager resourceManager_g;
+	PhysicsSystem physics_g;
 
 	void Engine::Register()
 	{

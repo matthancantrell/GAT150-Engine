@@ -1,9 +1,8 @@
 #pragma once
 #include <string>
-#include <istream>
 #include "rapidjson/document.h"
 
-#define READ_DATA(value,data) Engine::json::Get(value, #data, data);
+#define READ_DATA(value,data) json::Get(value, #data, data)
 
 namespace Engine
 {
