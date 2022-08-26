@@ -14,10 +14,12 @@ namespace Engine
 		~Scene() = default;
 
 		void Initialize();
-
 		void Update();
+
 		void Draw(Renderer& renderer);
 		void Add(std::unique_ptr<Actor> actor);
+
+		void RemoveAll();
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;

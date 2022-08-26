@@ -1,7 +1,4 @@
 #include "Engine.h"
-#include "Math/MathUtils.h"
-#include "Renderer/Font.h"
-#include "Renderer/Text.h"
 #include <iostream>
 
 using namespace std;
@@ -43,6 +40,7 @@ int main()
 		// Update
 		Engine::inputSystem_g.Update();
 		Engine::audioSystem_g.Update();
+		Engine::physics_g.Update();
 		Engine::timer_g.Tick();
 
 		if (Engine::inputSystem_g.GetKeyState(Engine::key_esc) == Engine::InputSystem::KeyState::Pressed) quit = true;
@@ -56,6 +54,7 @@ int main()
 
 		Engine::renderer_g.EndFrame();
 	}
+	scene.RemoveAll();
 
 	Engine::inputSystem_g.ShutDown();
 	Engine::audioSystem_g.ShutDown();

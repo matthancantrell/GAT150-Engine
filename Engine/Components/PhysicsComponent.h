@@ -4,6 +4,8 @@
 
 namespace Engine
 {
+	class Actor;
+
 	class PhysicsComponent : public Component
 	{
 	public:

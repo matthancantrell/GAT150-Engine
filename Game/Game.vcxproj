@@ -138,6 +138,9 @@
       <Project>{f3dff88b-e8ca-44e8-b9ef-0defd004ee7f}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Build\Assets\Levels\level.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

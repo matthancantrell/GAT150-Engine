@@ -4,6 +4,15 @@
 
 namespace Engine
 {
+	void PlayerComponent::Initialize()
+	{
+		auto component = owner_->GetComponent<CollisionComponent>();
+		if (component)
+		{
+			component->SetCollisionEnter(std::bind(&PlayerComponent::OnCollisionEnter, this, std::placeholders::_1));
+			component->SetCollisionExit(std::bind(&PlayerComponent::OnCollisionExit, this, std::placeholders::_1));
+		}
+	}
 	void PlayerComponent::Update()
 	{
 		// Movement
@@ -17,25 +26,18 @@ namespace Engine
 			direction = Vector2::Right;
 		}
 
-		float thrust = 0;
-		if (inputSystem_g.GetKeyState(key_up) == InputSystem::Held)
-		{
-			thrust = 100;
-		}
-
-
 		auto component = owner_->GetComponent<PhysicsComponent>();
 		if (component)
 		{
 			component->ApplyForce(direction * speed);
 		}
 		// Shoot
-		if (inputSystem_g.GetKeyState(key_space) == InputSystem::Held)
+		if (inputSystem_g.GetKeyState(key_space) == InputSystem::Pressed)
 		{
 			auto component = owner_->GetComponent<PhysicsComponent>();
 			if (component)
 			{
-				component->ApplyForce(Vector2::Up * 30);
+				component->ApplyForce(Vector2::Up * 500);
 			}
 		}
 	}
@@ -50,5 +52,13 @@ namespace Engine
 		READ_DATA(value, speed);
 
 		return true;
+	}
+	void PlayerComponent::OnCollisionEnter(Actor* other)
+	{
+		std::cout << "Player Enter" << std::endl;
+	}
+	void PlayerComponent::OnCollisionExit(Actor* other)
+	{
+		std::cout << "Player Exit" << std::endl;
 	}
 }

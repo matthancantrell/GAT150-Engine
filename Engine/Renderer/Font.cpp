@@ -1,5 +1,6 @@
 #include "Font.h"
 #include "Core/Logger.h"
+#include "Math/Color.h"
 #include <SDL_TTF.h>
 
 namespace Engine
@@ -24,6 +25,19 @@ namespace Engine
 			return false;
 		}
 		return true;
+	}
+
+	SDL_Surface* Font::CreateSurface(const std::string& text, const Color& color)
+	{
+		SDL_Color c = *((SDL_Color*)(&color));
+		SDL_Surface* surface = TTF_RenderText_Solid(ttfFont_, text.c_str(), c);
+
+		if (!surface)
+		{
+			LOG(SDL_GetError());
+		}
+
+		return surface;
 	}
 
 	bool Font::Create(std::string filename, ...)

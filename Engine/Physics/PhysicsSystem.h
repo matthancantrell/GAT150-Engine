@@ -4,6 +4,7 @@
 #include "C:\A\Q4\GAT150\GAT150\ThirdParty\box2d\include\box2d/b2_polygon_shape.h"
 #include "C:\A\Q4\GAT150\GAT150\ThirdParty\box2d\include\box2d/b2_fixture.h"
 #include "Math/Vector2.h"
+#include "Physics/ContactListener.h"
 #include <memory>
 
 #define VECTOR2_TO_B2VEC2(vec) (*(b2Vec2*)(&vec))
@@ -11,6 +12,8 @@
 
 namespace Engine
 {
+	class ContactListener;
+
 	class PhysicsSystem
 	{
 	public:
@@ -49,5 +52,6 @@ namespace Engine
 		static const float pixelsPerUnit;
 
 		std::unique_ptr<b2World> world_;
+		std::unique_ptr<ContactListener> contactListener_;
 	};
 }

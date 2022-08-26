@@ -13,6 +13,7 @@
 #include "Components/PhysicsComponent.h"
 #include "Components/RBPhysicsComponent.h"
 #include "Components/CollisionComponent.h"
+#include "Components/TextComponent.h"
 #include "Components/ModelComponent.h"
 
 #include "Input/InputSystem.h"

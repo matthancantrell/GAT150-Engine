@@ -1,6 +1,7 @@
 #include "SpriteAnimateComponent.h"
 #include "Renderer/Renderer.h"
 #include "Framework/Actor.h"
+#include "Renderer/Texture.h"
 #include "Engine.h"
 
 namespace Engine

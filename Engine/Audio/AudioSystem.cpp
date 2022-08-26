@@ -2,59 +2,72 @@
 #include "Core/Logger.h"
 #include <fmod.hpp>
 
-void Engine::AudioSystem::Initialize()
+namespace Engine
 {
-	FMOD::System_Create(&fmodSystem_);
-
-	void* extradriverdata = nullptr;
-	fmodSystem_->init(32, FMOD_INIT_NORMAL, extradriverdata);
-}
-
-void Engine::AudioSystem::ShutDown()
-{
-	for (auto sound : sounds_)
+	void Engine::AudioSystem::Initialize()
 	{
-		sound.second->release();
+		FMOD::System_Create(&fmodSystem_);
+
+		void* extradriverdata = nullptr;
+		fmodSystem_->init(32, FMOD_INIT_NORMAL, extradriverdata);
 	}
 
-	sounds_.clear();
-	fmodSystem_->close();
-	fmodSystem_->release();
-}
-
-void Engine::AudioSystem::Update()
-{
-	fmodSystem_->update();
-}
-
-void Engine::AudioSystem::AddAudio(const std::string& name, const std::string& filename)
-{
-	auto it = sounds_.find(name);
-	if (it == sounds_.end())
+	void Engine::AudioSystem::ShutDown()
 	{
-		FMOD::Sound* sound = nullptr;
-		fmodSystem_->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
-		if (sound == nullptr)
+		for (auto sound : sounds_)
 		{
-			LOG("Error: Could Not Create Sound from %s.", filename.c_str());
+			sound.second->release();
 		}
-		sounds_[name] = sound;
-	}
-}
 
-void Engine::AudioSystem::PlayAudio(const std::string& name, bool loop)
-{
-	auto it = sounds_.find(name);
-	if (it == sounds_.end())
-	{
-		LOG("Error: Could Not Find Sound %s.", name.c_str());
+		sounds_.clear();
+		fmodSystem_->close();
+		fmodSystem_->release();
 	}
-	if (it != sounds_.end())
-	{
-		FMOD::Sound* sound = it->second;
-		sound->setMode(FMOD_LOOP_OFF);
 
+	void Engine::AudioSystem::Update()
+	{
+		fmodSystem_->update();
+	}
+
+	void Engine::AudioSystem::AddAudio(const std::string& name, const std::string& filename)
+	{
+		auto it = sounds_.find(name);
+		if (it == sounds_.end())
+		{
+			FMOD::Sound* sound = nullptr;
+			fmodSystem_->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
+			if (sound == nullptr)
+			{
+				LOG("Error: Could Not Create Sound from %s.", filename.c_str());
+			}
+			sounds_[name] = sound;
+		}
+	}
+
+	AudioChannel AudioSystem::PlayAudio(const std::string& name, float volume, float pitch, bool loop)
+	{
+		// find sound in map 
+		auto iter = sounds_.find(name);
+		// if sound key not found in map (iter == end()), return default channel 
+		if (iter == sounds_.end())
+		{
+			LOG("Error could not find sound %s.", name.c_str());
+			return AudioChannel{};
+		}
+
+		// get sound pointer from iterator 
+		FMOD::Sound* sound = iter->second;
+		FMOD_MODE mode = (loop) ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;
+		sound->setMode(mode);
+
+		// play sound, sets the pointer to the channel it is playing in 
 		FMOD::Channel* channel;
 		fmodSystem_->playSound(sound, 0, false, &channel);
+		channel->setVolume(volume);
+		channel->setPitch(pitch);
+		channel->setPaused(false);
+
+		// return audio channel with channel pointer set 
+		return AudioChannel{ channel };
 	}
 }

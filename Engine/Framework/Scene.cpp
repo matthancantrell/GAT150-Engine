@@ -10,6 +10,11 @@ namespace Engine
 		for (auto& actor : actors_) { actor->Initialize(); }
 	}
 
+	void Scene::RemoveAll()
+	{
+		actors_.clear();
+	}
+
 	void Scene::Update()
 	{
 		auto iter = actors_.begin();

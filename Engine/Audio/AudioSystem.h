@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <map>
+#include "AudioChannel.h"
+
 namespace FMOD
 {
 	class System;
@@ -22,7 +24,7 @@ namespace Engine
 		void Update();
 
 		void AddAudio(const std::string& name, const std::string& filename);
-		void PlayAudio(const std::string& name, bool loop = false);
+		AudioChannel PlayAudio(const std::string& name, float volume = 1, float pitch = 1, bool loop = false);
 
 	private:
 

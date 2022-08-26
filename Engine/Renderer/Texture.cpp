@@ -46,7 +46,20 @@ namespace Engine
 		// create texture (returns true/false if successful) 
 		return Create(renderer, filename);
 	}
+	bool Texture::CreateFromSurface(SDL_Surface* surface, Renderer& renderer)
+	{
+		if (texture_) SDL_DestroyTexture(texture_);
 
+		texture_ = SDL_CreateTextureFromSurface(renderer.GetRenderer_(), surface);
+		SDL_FreeSurface(surface);
+
+		if (texture_ == nullptr)
+		{
+			LOG(SDL_GetError());
+			return false;
+		}
+		return true;
+	}
 	Engine::Vector2 Texture::GetSize() const
 	{
 		SDL_Point point;

@@ -9,6 +9,8 @@ namespace Engine
 	{
 		b2Vec2 gravity{ 0, 10 };
 		world_ = std::make_unique<b2World>(gravity);
+		contactListener_ = std::make_unique<ContactListener>();
+		world_->SetContactListener(contactListener_.get());
 	}
 
 	void PhysicsSystem::Shutdown()

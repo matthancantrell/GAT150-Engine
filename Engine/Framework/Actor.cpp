@@ -58,8 +58,6 @@ namespace Engine
 		{
 			transform_.Update();
 		}
-
-		transform_.Update();
 	}
 
 	bool Actor::Write(const rapidjson::Value& value) const { return true; }
@@ -69,8 +67,7 @@ namespace Engine
 		READ_DATA(value, tag_);
 		READ_DATA(value, name_);
 
-		transform_.Read(value["transform"]);
-
+		if (value.HasMember("transform")) transform_.Read(value["transform"]);
 		if (!(value.HasMember("transform")) || !value["transform"].IsArray())
 		{
 			for (auto& componentValue : value["components"].GetArray())
