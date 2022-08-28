@@ -12,6 +12,8 @@ namespace Engine
 
 		using functionpr = std::function<void(Actor*)>;
 
+		CLASS_DECLARATION(CollisionComponent)
+
 		virtual void Initialize() override;
 		virtual void Update() override;
 

@@ -10,6 +10,8 @@ namespace Engine
 	{
 	public:
 
+		CLASS_DECLARATION(ModelComponent)
+
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;
 

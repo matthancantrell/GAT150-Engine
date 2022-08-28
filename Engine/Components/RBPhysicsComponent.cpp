@@ -45,4 +45,11 @@ namespace Engine
 
 		return true;
 	}
+
+	void RBPhysicsComponent::GravitySwitch()
+	{
+		float grav = body_->GetGravityScale();
+		grav = grav * -1;
+		body_->SetGravityScale(grav);
+	}
 }

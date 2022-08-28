@@ -20,6 +20,25 @@ namespace Engine
 			}
 		}
 
+		//auto component = owner_->GetComponent<PhysicsComponent>();
+		//if (component)
+		//{
+		//	if (component->velocity_.x > 0 || component->velocity_.y > 0)
+		//	{
+		//		texture_ = movingTexture_;
+		//		num_columns = move_num_columns;
+		//		num_rows = move_num_rows;
+		//		end_frame = move_end_frame;
+		//	}
+		//	if (component->velocity_.x <= 0 && component->velocity_.y <= 0)
+		//	{
+		//		texture_ = idleTexture_;
+		//		num_columns = idle_num_columns;
+		//		num_rows = idle_num_rows;
+		//		end_frame = idle_end_frame;
+		//	}
+		//}
+
 		//calculate source rect
 		Vector2 cellSize = texture_->GetSize() / Vector2{ num_columns, num_rows };
 

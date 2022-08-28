@@ -6,12 +6,15 @@
 namespace Engine
 {
 
-	class Scene : public ISerializable
+	class Scene : public GameObject, public ISerializable
 	{
 	public:
 
 		Scene() = default;
+		Scene(const Scene& other) {}
 		~Scene() = default;
+
+		CLASS_DECLARATION(Scene)
 
 		void Initialize();
 		void Update();

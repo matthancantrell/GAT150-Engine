@@ -10,6 +10,8 @@ namespace Engine
 	{
 	public:
 
+		CLASS_DECLARATION(SpriteAnimateComponent)
+
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;
 
@@ -18,6 +20,7 @@ namespace Engine
 		bool Write(const rapidjson::Value& value) const override;
 		bool Read(const rapidjson::Value& value) override;
 
+		// In-Use Texture Variables
 		float fps = 0;
 		int num_columns = 0;
 		int num_rows = 0;

@@ -40,6 +40,16 @@ namespace Engine
 				component->ApplyForce(Vector2::Up * 500);
 			}
 		}
+
+		// Grav Swap
+		if (inputSystem_g.GetKeyState(key_shift) == InputSystem::Pressed)
+		{
+			auto component = owner_->GetComponent<RBPhysicsComponent>();
+			if (component)
+			{
+				component->GravitySwitch();
+			}
+		}
 	}
 
 	bool PlayerComponent::Write(const rapidjson::Value& value) const
@@ -55,6 +65,10 @@ namespace Engine
 	}
 	void PlayerComponent::OnCollisionEnter(Actor* other)
 	{
+		if (other->GetName() == "Coin")
+		{
+			other->SetDestroy(true);
+		}
 		std::cout << "Player Enter" << std::endl;
 	}
 	void PlayerComponent::OnCollisionExit(Actor* other)

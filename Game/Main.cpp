@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "Gravikitty.h"
 #include <iostream>
 
 using namespace std;
@@ -26,13 +27,9 @@ int main()
 	Engine::renderer_g.SetClearColor(Engine::Color{ 50, 50, 50, 255 }); // Sets background color within window
 
 	// Scene, Actor, Components
-	Engine::Scene scene;
+	unique_ptr<Gravikitty> game = make_unique<Gravikitty>();
+	game->Initialize();
 
-	rapidjson::Document document;
-	bool success = Engine::json::Load("Levels/level.txt", document);
-	scene.Read(document);
-	scene.Initialize();
-	
 	bool quit = false;
 	while (!quit)
 	{
@@ -45,16 +42,19 @@ int main()
 
 		if (Engine::inputSystem_g.GetKeyState(Engine::key_esc) == Engine::InputSystem::KeyState::Pressed) quit = true;
 
-		scene.Update();
+		game->Update();
 
 		// Render
 		Engine::renderer_g.BeginFrame();
 
-		scene.Draw(Engine::renderer_g);
+		game->Draw(Engine::renderer_g);
 
 		Engine::renderer_g.EndFrame();
 	}
-	scene.RemoveAll();
+	game->Shutdown();
+	game.reset();
+
+	Engine::Factory::Instance().ShutDown();
 
 	Engine::inputSystem_g.ShutDown();
 	Engine::audioSystem_g.ShutDown();

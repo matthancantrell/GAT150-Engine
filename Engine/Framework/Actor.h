@@ -14,7 +14,10 @@ namespace Engine
 	{
 	public:
 		Actor() = default;
+		Actor(const Actor& other);
 		Actor(const Transform& transform) : transform_{ transform } {}
+
+		CLASS_DECLARATION(Actor)
 
 		virtual void Initialize() override;
 
@@ -31,17 +34,27 @@ namespace Engine
 		T* GetComponent();
 
 		virtual void OnCollision(Actor* other) {}
+
+		//Getters and Setters
 		float GetRadius() { return 0; } // model_.GetRadius()* std::max(transform_.scale.x, transform_.scale.y);
 	
 		std::string& GetTag() { return tag_; }
-		std::string& GetName() { return name_; }
+		void SetTag(std::string tag) { tag_ = tag; }
 
-		void SetName(const std::string& name) { this->name_ = name; }
+		std::string& GetName() { return name_; }
+		void SetName(const std::string name) { this->name_ = name; }
+
+		bool GetDestroy() { return destroy_; }
+		void SetDestroy(bool destroy) { destroy_ = destroy; }
+
+		bool GetActive() { return active_; }
+		void SetActive(bool& active) { active_ = active; };
+
+		Scene* GetScene() { return scene_; }
 		
 		friend class Scene;
 
 		// State
-		bool destroy_ = false;
 
 		Transform transform_;
 
@@ -49,6 +62,8 @@ namespace Engine
 
 		std::string tag_;
 		std::string name_;
+		bool active_ = true;
+		bool destroy_ = false;
 
 		// Physics
 		Vector2 velocity_;

@@ -10,6 +10,8 @@ namespace Engine
 		RBPhysicsComponent() = default;
 		~RBPhysicsComponent();
 
+		CLASS_DECLARATION(RBPhysicsComponent)
+
 		void Initialize() override;
 		void Update() override;
 
@@ -17,6 +19,8 @@ namespace Engine
 		
 		bool Write(const rapidjson::Value& value) const override;
 		bool Read(const rapidjson::Value& value) override;
+
+		void GravitySwitch();
 
 		friend class CollisionComponent;
 

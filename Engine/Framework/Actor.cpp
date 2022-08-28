@@ -4,8 +4,26 @@
 
 namespace Engine
 {
+	Actor::Actor(const Actor& other)
+	{
+		name_ = other.name_;
+		tag_ = other.tag_;
+		transform_ = other.transform_;
+		scene_ = other.scene_;
+
+		for (auto& component : other.components_)
+		{
+			auto clone = std::unique_ptr<Component>((Component*)component->Clone().release());
+			AddComponent(std::move(clone));
+		}
+	}
+
 	void Engine::Actor::Draw(Renderer& renderer)
 	{
+		if (!active_)
+		{
+			return;
+		}
 		for (auto& component : components_)
 		{
 			//component->Update();
@@ -42,6 +60,10 @@ namespace Engine
 	}
 	void Engine::Actor::Update()
 	{
+		if (!active_)
+		{
+			return;
+		}
 		for (auto& component : components_)
 		{
 			component->Update();
@@ -66,6 +88,7 @@ namespace Engine
 	{
 		READ_DATA(value, tag_);
 		READ_DATA(value, name_);
+		READ_DATA(value, active_);
 
 		if (value.HasMember("transform")) transform_.Read(value["transform"]);
 		if (!(value.HasMember("transform")) || !value["transform"].IsArray())
