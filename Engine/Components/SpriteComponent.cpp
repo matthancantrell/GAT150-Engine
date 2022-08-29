@@ -11,7 +11,7 @@ namespace Engine
 
 	void SpriteComponent::Draw(Renderer& renderer)
 	{
-		renderer.Draw(texture_, owner_->transform_);
+		renderer.Draw(texture_, GetSource(), owner_->transform_);
 	}
 
 	bool SpriteComponent::Write(const rapidjson::Value& value) const

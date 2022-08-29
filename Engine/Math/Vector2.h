@@ -30,6 +30,10 @@ namespace Engine
 		Vector2 Normalized();
 		void Normalize();
 
+		float Dot(const Vector2& v);
+		float GetAngleBetween(const Vector2& v);
+		float GetSignedAngleBetween(const Vector2& v);
+
 		float GetAngle();
 
 		static Vector2 Rotate(const Vector2& v, float angle);
@@ -109,6 +113,24 @@ namespace Engine
 		float y = v.x * std::sin(angle) + v.y * std::cos(angle);
 
 		return Vector2 { x, y };
+	}
+
+	inline float Vector2::Dot(const Vector2& v)
+	{
+		return x * v.x + y * v.y;
+	}
+
+	inline float Vector2::GetAngleBetween(const Vector2& v)
+	{
+		return std::acos(Dot(v));
+	}
+
+	inline float Vector2::GetSignedAngleBetween(const Vector2& v)
+	{
+		float y = x * v.y - y * v.x; // perpendicular dot product 
+		float x = x * v.x + y * v.y; // dor product 
+
+		return std::atan2(y, x);
 	}
 
 	inline float Vector2::GetAngle()

@@ -30,6 +30,7 @@ namespace Engine
 
 			return true;
 		}
+
 		bool Get(const rapidjson::Value& value, const std::string& name, int& data)
 		{
 			// check if 'name' member exists and is of type 
@@ -38,7 +39,7 @@ namespace Engine
 				return false;
 			}
 
-			if (value[name.c_str()].IsNumber() == false)
+			if (!value[name.c_str()].IsNumber())
 			{
 				LOG("error reading json data", name.c_str());
 				return false;
@@ -54,7 +55,7 @@ namespace Engine
 			{
 				return false;
 			}
-			if (value[name.c_str()].IsNumber() == false)
+			if (!value[name.c_str()].IsNumber())
 			{
 				LOG("error reading json data", name.c_str());
 				return false;
@@ -70,7 +71,7 @@ namespace Engine
 			{
 				return false;
 			}
-			if (value[name.c_str()].IsBool() == false)
+			if (!value[name.c_str()].IsBool())
 			{
 				LOG("error reading json data", name.c_str());
 				return false;
@@ -86,7 +87,7 @@ namespace Engine
 			{
 				return false;
 			}
-			if (value[name.c_str()].IsString() == false)
+			if (!value[name.c_str()].IsString())
 			{
 				LOG("error reading json data", name.c_str());
 				return false;
@@ -100,7 +101,7 @@ namespace Engine
 			{
 				return false;
 			}
-			if (value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 2)
+			if (!value[name.c_str()].IsArray() || value[name.c_str()].Size() != 2)
 			{
 				LOG("error reading json data %s", name.c_str());
 				return false;
@@ -125,7 +126,7 @@ namespace Engine
 			{
 				return false;
 			}
-			if (value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 4)
+			if (!value[name.c_str()].IsArray() || value[name.c_str()].Size() != 4)
 			{
 				LOG("error reading json data %s", name.c_str());
 				return false;
@@ -154,7 +155,7 @@ namespace Engine
 			{
 				return false;
 			}
-			if (value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 4)
+			if (!value[name.c_str()].IsArray() || value[name.c_str()].Size() != 4)
 			{
 				LOG("error reading json data %s", name.c_str());
 				return false;

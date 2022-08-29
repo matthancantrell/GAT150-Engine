@@ -117,14 +117,13 @@
                "data.constrain_angle":true
             },
             {
-               "type":"CollisionComponent",
-               "data.size": [48, 48]
+               "type":"CollisionComponent"
             },
             {
                "type":"SpriteAnimateComponent",
                "texture_name":"Textures/gothic-hero-run.png",
                "fps":12,
-               "num_columns":12,
+               "num_columns":12
                "num_rows":1,
                "start_frame":1,
                "end_frame":12

@@ -38,8 +38,11 @@ namespace Engine
 		//		end_frame = idle_end_frame;
 		//	}
 		//}
+	}
 
-		//calculate source rect
+	Rect& SpriteAnimateComponent::GetSource()
+	{
+		// calculate source rect 
 		Vector2 cellSize = texture_->GetSize() / Vector2{ num_columns, num_rows };
 
 		int column = (frame - 1) % num_columns;
@@ -49,11 +52,13 @@ namespace Engine
 		source.y = (int)(row * cellSize.y);
 		source.w = (int)(cellSize.x);
 		source.h = (int)(cellSize.y);
+
+		return source;
 	}
 
 	void SpriteAnimateComponent::Draw(Renderer& renderer)
 	{
-		renderer.Draw(texture_, source, owner_->transform_);
+		renderer.Draw(texture_, GetSource(), owner_->transform_);
 	}
 
 	bool SpriteAnimateComponent::Write(const rapidjson::Value& value) const

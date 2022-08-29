@@ -8,6 +8,14 @@ namespace Engine
         auto component = owner_->GetComponent<RBPhysicsComponent>();
         if (component)
         {
+            if (data.size.x == 0 && data.size.y == 0)
+            {
+                auto renderComponent = owner_->GetComponent<RenderComponent>();
+                if (renderComponent)
+                {
+                    data.size = Vector2{ renderComponent->GetSource().w, renderComponent->GetSource().h };
+                }
+            }
             physics_g.SetCollisionBox(component->body_, data, owner_);
         }
     }

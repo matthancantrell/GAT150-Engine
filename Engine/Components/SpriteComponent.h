@@ -21,8 +21,6 @@ namespace Engine
 		bool Write(const rapidjson::Value& value) const;
 		bool Read(const rapidjson::Value& value);
 
-		Rect source;
-
 		std::shared_ptr<Texture> texture_;
 	};
 }

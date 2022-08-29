@@ -20,6 +20,8 @@ namespace Engine
 		bool Write(const rapidjson::Value& value) const override;
 		bool Read(const rapidjson::Value& value) override;
 
+		Rect& GetSource() override;
+
 		// In-Use Texture Variables
 		float fps = 0;
 		int num_columns = 0;
