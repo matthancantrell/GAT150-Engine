@@ -1,12 +1,13 @@
 #include "Gravikitty.h"
 #include "Engine.h"
+#include <iostream>
 
 void Gravikitty::Initialize()
 {
 	scene_ = std::make_unique<Engine::Scene>();
 
 	rapidjson::Document document;
-	std::vector<std::string> sceneNames = { "Levels/prefabs.txt", "Levels/tilemap.txt", "Levels/level.txt" };
+	std::vector<std::string> sceneNames = { "Text-Models/Prefab.txt", "Levels/level.txt", "Text-Models/Tilemap.txt"};
 
 	for (auto sceneName : sceneNames)
 	{
@@ -29,6 +30,7 @@ void Gravikitty::Shutdown()
 
 void Gravikitty::Update()
 {
+
 	scene_->Update();
 }
 

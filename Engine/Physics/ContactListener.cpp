@@ -15,11 +15,11 @@ namespace Engine
 			Actor* actorA = (Actor*)(fixtureA->GetUserData().pointer);
 			Actor* actorB = (Actor*)(fixtureB->GetUserData().pointer);
 			
-			if (actorA->GetComponent<CollisionComponent>())
+			if (!actorA->GetDestroy() && actorA->GetComponent<CollisionComponent>())
 			{
 				actorA->GetComponent<CollisionComponent>()->OnCollisionEnter(actorB);
 			}
-			if (actorB->GetComponent<CollisionComponent>())
+			if (!actorB->GetDestroy() && actorB->GetComponent<CollisionComponent>())
 			{
 				actorB->GetComponent<CollisionComponent>()->OnCollisionEnter(actorA);
 			}

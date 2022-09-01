@@ -76,14 +76,15 @@ namespace Engine
 		{
 			if (tag == actor->GetTag())
 			{
-				T* tagActor = dynamic_cast<T*>(actor.get());
-				if (tagActor)
+				T* TagActor = dynamic_cast<T*>(actor.get());
+				if (TagActor)
 				{
-					result.push_back(std::move(tagActor));
+					result.push_back(TagActor);
 				}
 			}
 		}
-		return result;
+
+		return std::vector<T*>();
 	}
 
 }

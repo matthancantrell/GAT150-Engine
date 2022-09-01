@@ -17,6 +17,7 @@
 #include "Components/TextComponent.h"
 #include "Components/ModelComponent.h"
 #include "Components/TileMapComponent.h"
+#include "Components/CameraComponent.h"
 
 #include "Input/InputSystem.h"
 #include "Audio/AudioSystem.h"
@@ -44,6 +45,7 @@
 #include <memory>
 #include <vector>
 #include <list>
+#include <variant>
 
 
 namespace Engine

@@ -37,7 +37,7 @@ namespace Engine
 			auto component = owner_->GetComponent<PhysicsComponent>();
 			if (component)
 			{
-				component->ApplyForce(Vector2::Up * 500);
+				component->ApplyForce(Vector2::Up * 200);
 			}
 		}
 
@@ -49,6 +49,12 @@ namespace Engine
 			{
 				component->GravitySwitch();
 			}
+		}
+		// set camera 
+		auto camera = owner_->GetScene()->GetActorFromName("Camera");
+		if (camera)
+		{
+			camera->transform_.position = Math::Lerp(camera->transform_.position, owner_->transform_.position, 2 * timer_g.deltaTime);
 		}
 	}
 

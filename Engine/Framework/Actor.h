@@ -48,7 +48,7 @@ namespace Engine
 		void SetDestroy(bool destroy) { destroy_ = destroy; }
 
 		bool GetActive() { return active_; }
-		void SetActive(bool& active) { active_ = active; };
+		void SetActive(bool active) { active_ = active; };
 
 		Scene* GetScene() { return scene_; }
 		
@@ -57,6 +57,7 @@ namespace Engine
 		// State
 
 		Transform transform_;
+		Vector2 velocity_;
 
 	protected:
 
@@ -64,9 +65,9 @@ namespace Engine
 		std::string name_;
 		bool active_ = true;
 		bool destroy_ = false;
+		float lifespan = 0;
 
 		// Physics
-		Vector2 velocity_;
 		float damping_ = 1;
 
 		// Object

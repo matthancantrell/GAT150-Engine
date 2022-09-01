@@ -1,6 +1,7 @@
 #pragma once
 #include "RenderComponent.h"
 #include "Math/Rect.h"
+#include <map>
 
 namespace Engine
 {
@@ -9,6 +10,22 @@ namespace Engine
 	class SpriteAnimateComponent : public RenderComponent
 	{
 	public:
+
+		struct Sequence
+		{
+			std::string name;
+
+			float fps = 0;
+			int num_columns = 0;
+			int num_rows = 0;
+
+			int start_frame = 0;
+			int end_frame = 0;
+
+			bool loop = true;
+
+			std::shared_ptr<Texture> texture_;
+		};
 
 		CLASS_DECLARATION(SpriteAnimateComponent)
 
@@ -20,20 +37,13 @@ namespace Engine
 		bool Write(const rapidjson::Value& value) const override;
 		bool Read(const rapidjson::Value& value) override;
 
+		virtual void SetSequence(const std::string& name);
 		Rect& GetSource() override;
 
-		// In-Use Texture Variables
-		float fps = 0;
-		int num_columns = 0;
-		int num_rows = 0;
-
-		int start_frame = 0;
-		int end_frame = 0;
-
 		int frame = 0;
-		float frameTimer = 0;
+		int frameTimer = 0;
 
-		Rect source;
-		std::shared_ptr<Texture> texture_;
+		std::map<std::string, Sequence> sequences_;
+		Sequence* sequence_ = nullptr;
 	};
 }

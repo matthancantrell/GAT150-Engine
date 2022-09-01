@@ -22,5 +22,6 @@ namespace Engine
 		REGISTER_CLASS(TextComponent);
 		REGISTER_CLASS(SpriteAnimateComponent);
 		REGISTER_CLASS(TilemapComponent);
+		REGISTER_CLASS(CameraComponent);
 	}
 }

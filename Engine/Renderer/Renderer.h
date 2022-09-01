@@ -1,6 +1,7 @@
 #pragma once
-#include "../Math/Vector2.h"
-#include "../Math/Color.h"
+#include "Math/Vector2.h"
+#include "Math/Color.h"
+#include "Math/Matrix3x3.h"
 #include "Texture.h"
 
 struct SDL_Renderer; // forward declaration
@@ -38,10 +39,14 @@ namespace Engine
 		void Draw(std::shared_ptr<Texture> texture, const Vector2& position, const float& angle = 0, const Vector2& scale = Vector2{ 1, 1 }, const Vector2& registration = Vector2 { 0.5f, 0.5f });
 		void Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration = Vector2{ 0.5f, 0.5f });
 		void Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration = Vector2{ 0.5f, 0.5f });
+		void Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration, bool flipH);
 
 		int GetWidth_() { return width_; }
 		int GetHeight_() { return height_; }
 		SDL_Renderer* GetRenderer_() { return renderer_; }
+
+		void SetViewMatrix(const Matrix3x3& view) { view_ = view; }
+		void SetViewportMatrix(const Matrix3x3& viewport) { viewport_ = viewport; }
 
 		friend class Text;
 		friend class Texture;
@@ -49,6 +54,9 @@ namespace Engine
 	private:
 		int width_ = 0;
 		int height_ = 0;
+
+		Matrix3x3 view_;
+		Matrix3x3 viewport_;
 
 		Color clearColor_{ 0, 0, 0, 255 };
 

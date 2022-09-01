@@ -141,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Build\Assets\Levels\level.txt" />
+    <Text Include="..\Build\Assets\Levels\level2.txt" />
+    <Text Include="..\Build\Assets\Text-Models\Prefab.txt" />
+    <Text Include="..\Build\Assets\Text-Models\Tilemap.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Gravikitty.h" />

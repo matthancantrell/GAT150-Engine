@@ -1,6 +1,7 @@
 #include "Actor.h"
 #include "Components/RenderComponent.h"
 #include "Factory.h"
+#include "Engine.h"
 
 namespace Engine
 {
@@ -9,6 +10,7 @@ namespace Engine
 		name_ = other.name_;
 		tag_ = other.tag_;
 		transform_ = other.transform_;
+		lifespan = other.lifespan;
 		scene_ = other.scene_;
 
 		for (auto& component : other.components_)
@@ -18,25 +20,24 @@ namespace Engine
 		}
 	}
 
-	void Engine::Actor::Draw(Renderer& renderer)
+	void Actor::Draw(Renderer& renderer)
 	{
-		if (!active_)
+		if (active_)
 		{
-			return;
-		}
-		for (auto& component : components_)
-		{
-			//component->Update();
-			auto renderComponent = dynamic_cast<RenderComponent*>(component.get());
-			if (renderComponent)
+			for (auto& component : components_)
 			{
-				renderComponent->Draw(renderer);
+				//component->Update();
+				auto renderComponent = dynamic_cast<RenderComponent*>(component.get());
+				if (renderComponent)
+				{
+					renderComponent->Draw(renderer);
+				}
 			}
-		}
 
-		for (auto& child : children_)
-		{
-			child->Draw(renderer);
+			for (auto& child : children_)
+			{
+				child->Draw(renderer);
+			}
 		}
 	}
 	void Actor::AddChild(std::unique_ptr<Actor> child)
@@ -58,27 +59,34 @@ namespace Engine
 		for (auto& component : components_) { component->Initialize(); }
 		for (auto& child : children_) { child->Initialize(); }
 	}
-	void Engine::Actor::Update()
+	void Actor::Update()
 	{
-		if (!active_)
+		if (active_)
 		{
-			return;
-		}
-		for (auto& component : components_)
-		{
-			component->Update();
-		}
-		for (auto& child : children_)
-		{
-			child->Update();
-		}
-		if (parent_ != nullptr)
-		{
-			transform_.Update(parent_->transform_.matrix);
-		}
-		else
-		{
-			transform_.Update();
+			for (auto& component : components_)
+			{
+				component->Update();
+			}
+			for (auto& child : children_)
+			{
+				child->Update();
+			}
+			if (parent_ != nullptr)
+			{
+				transform_.Update(parent_->transform_.matrix);
+			}
+			else
+			{
+				transform_.Update();
+			}
+			if (lifespan > 0)
+			{
+				lifespan -= timer_g.deltaTime;
+			}
+			if (lifespan < 0)
+			{
+				SetDestroy(true);
+			}
 		}
 	}
 
@@ -89,6 +97,7 @@ namespace Engine
 		READ_DATA(value, tag_);
 		READ_DATA(value, name_);
 		READ_DATA(value, active_);
+		READ_DATA(value, lifespan);
 
 		if (value.HasMember("transform")) transform_.Read(value["transform"]);
 		if (!(value.HasMember("transform")) || !value["transform"].IsArray())

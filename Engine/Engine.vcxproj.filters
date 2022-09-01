@@ -143,6 +143,9 @@
     <ClCompile Include="Components\TileMapComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Components\CameraComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.h">
@@ -284,6 +287,9 @@
       <Filter>Source\Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\TileMapComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CameraComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
   </ItemGroup>

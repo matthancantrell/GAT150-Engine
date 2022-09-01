@@ -23,5 +23,7 @@ namespace Engine
 		virtual void OnCollisionExit(Actor* other) override;
 
 		float speed = 0;
+		int score = 0;
+		int groundCount = 0;
 	};
 }

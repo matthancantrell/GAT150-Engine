@@ -26,6 +26,15 @@
     <Text Include="..\Build\Assets\Levels\level.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="..\Build\Assets\Text-Models\Prefab.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\Build\Assets\Text-Models\Tilemap.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\Build\Assets\Levels\level2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Gravikitty.h">
